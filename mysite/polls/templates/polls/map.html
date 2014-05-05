@@ -13,8 +13,10 @@
 		<script>
         function initialize(){
             var mapOptions = {
-                center: new google.maps.LatLng(-34.397, 150.644),
-                zoom: 8,
+			//-34.397 and 150.644
+				
+                center: new google.maps.LatLng(0, 0),
+                zoom: 3,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
             };
             var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
@@ -27,9 +29,13 @@
 	<body class = "body">
 		<header class = "mainHead">
 			<h1> DATA VISUALIZATION OF POLL DATA </h1>
-		</header> 
+		</header>
+		{% for poll in poll_list %}
+			<li><h3><a href="{% url 'polls:detail' poll.id %}">Vote here</h3></a></li>
+		{% endfor %}		
 		<div id = "map-canvas" style="height:825px;width:1000px;margin-left:auto;margin-right:auto;">
 		</div>
+		
 		
 		
 	</body>

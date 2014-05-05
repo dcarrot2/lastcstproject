@@ -59,7 +59,10 @@ def vote(request, poll_id):
         return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
 
 def maps(request):
-    return render(request, 'polls/map.html',)
+    poll_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'poll_list': poll_list}
+    
+    return render(request, 'polls/map.html',context)
 
         
 ##    return HttpResponse("You're voting on poll %s." & poll_id)

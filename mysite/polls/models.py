@@ -1,10 +1,13 @@
 from django.db import models
+from django.utils.timezone import now
+
+now_time = now()
 
 # Create your models here.
 
 class Question(models.Model):
     question = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField(default=now_time, blank=True)
 
     def __unicode__(self):
         return self.question
