@@ -60,7 +60,8 @@ def vote(request, poll_id):
 
 def maps(request):
     poll_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'poll_list': poll_list}
+    country_list = Country.objects.all()
+    context = {'poll_list': poll_list, 'country_list':country_list}
     
     return render(request, 'polls/map.html',context)
 
