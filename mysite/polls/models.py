@@ -15,6 +15,7 @@ class Question(models.Model):
 class Country(models.Model):
     poll = models.ForeignKey(Question)
     choice_text = models.CharField(max_length=200)
+    voter_name = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
     class Meta:
@@ -23,3 +24,8 @@ class Country(models.Model):
 
     def __unicode__(self):
         return (self.choice_text)
+
+##    def toString(self):
+##        return (str(self.choice_text))
+        
+

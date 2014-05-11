@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse ,HttpResponseRedirect
 #from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse
-from polls.models import Question, Country
+from polls.models import Question, Country #import my django models
+
 #import database models to views.py
 
 def index(request):
@@ -60,10 +61,11 @@ def vote(request, poll_id):
 
 def maps(request):
     poll_list = Question.objects.order_by('-pub_date')[:5]
-    country_list = Country.objects.all()
-    context = {'poll_list': poll_list, 'country_list':country_list}
     
+    country_list = Country.objects.all() #get all Country objects and store into a list
+
+
+    
+    context = {'poll_list': poll_list, 'country_list':country_list,} #context dictionary to use django's template tags in html
     return render(request, 'polls/map.html',context)
 
-        
-##    return HttpResponse("You're voting on poll %s." & poll_id)
