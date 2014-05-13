@@ -1,0 +1,11 @@
+h1{
+	/*#797979*/
+	background-color: #122333;
+	height: 35px;
+	border-radius: 20px;
+	
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	color: #FFFFFF;
+	text-align: center;
+}

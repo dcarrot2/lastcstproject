@@ -24,12 +24,14 @@
 			
 			{% for country in country_list %} //loop through countries
 				{% if country.votes > 0 %} //if it has been voted for
-					codeAddress("{{country.choice_text}}"); //call function and pass string and django template tag
+					codeAddress("{{country.choice_text}}", "{{name_list.name}}"); //call function and pass string and django template tag
 				{% endif %} //end if
 			{% endfor %} //end for
-					
+				
 				
 			}
+			
+			
 			
 			function codeAddress(address)
 			{
@@ -42,8 +44,19 @@
 						var marker = new google.maps.Marker(
 						{
 							map:map,
-							position: results[0].geometry.location //place marker at location
+							position: results[0].geometry.location, //place marker at location
+							//animation: google.maps.Animation.BOUNCE
 						});
+						
+						var infowindow = new google.maps.InfoWindow({
+							content:address,
+						});
+						
+						google.maps.event.addListener(marker, 'click', function() {
+							infowindow.open(map,marker);
+						});
+						
+						
 					} else{
 						alert('Geocode was not succesful for the following reason: ' + status);
 					}
@@ -61,7 +74,15 @@
 		{% for poll in poll_list %}
 			<li><h3><a href="{% url 'polls:detail' poll.id %}">Vote here</a></h3></li>
 		{% endfor %}
-
+		
+		<aside class="names">
+		<article>
+			<h3>Voters</h3>
+			{% for name in name_list %}
+				<p> {{name.name}} voted for {{name.vote}} </p>
+			{% endfor %}
+		</article>
+		</aside>
 			
 		<aside class="sideInfo">
 		<article>
@@ -74,8 +95,11 @@
 		</article>
 		</aside>
 		
-		<div id = "map-canvas" style="height:825px;width:1000px;margin-left:auto;margin-right:auto;">
+		<div id = "map-canvas" style="height:700px;width:1000px;position:fixed;top:-275px;right:-75px;">
 		</div>
+		
+		<!-- <div id = "map-canvas" style="height:825px;width:1000px;margin-left:auto;margin-right:auto;float:right;margin-top:auto;">
+		</div> -->
 		
 		
 		

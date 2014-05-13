@@ -12,5 +12,9 @@ urlpatterns = patterns('',
     url(r'^(?P<poll_id>\d+)/vote/$', views.vote, name='vote'),
     #ex: /map/
     url(r'^map/$', views.maps, name = 'map'),
+    #ex:/polls/5/sendandroid
+    url(r'^(?P<poll_id>\d+)/sendandroid/$', views.sendandroid, name='sendandroid'),
+    #ex:/polls/5/sendandroidnames
+    url(r'^(?P<poll_id>\d+)/sendandroidnames/$', views.sendandroidnames, name='sendandroidnames'),
                        
 )
