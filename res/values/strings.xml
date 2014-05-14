@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Poll Map</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_name_list">NameList</string>
+    <string name="title_activity_poll">Poll</string>
+    <string name="submit">Submit</string>
+    <string name="countryQuestion">What country would you like to visit?</string>
+    <string name="action_new">Add an a new poll </string>
+    <string name="action_refresh">Refresh names</string>
+    <string name="name">Enter your name:</string>
+
+</resources>
