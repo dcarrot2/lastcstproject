@@ -21,20 +21,6 @@
 	padding-bottom: 25px;
 }
 
-.names{
-	width: 25%;
-	clear: left; /*Changed to right from left*/
-	margin: 1% 0% 1% 0%; 
-	border-radius: 7px;
-	-webkit-border-radius: 7px;
-	-moz-border-radius: 7px;
-	background-color: #f8f8f8;
-}
-
-.map-canvas{
-	float: right;
-
-}
 
 .mainFooter{
 	width: 100%;

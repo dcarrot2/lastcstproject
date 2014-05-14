@@ -1,14 +1,4 @@
-
-<link rel="stylesheet" href="/static/polls/question.css" type="text/css"/>
-
 <h1>{{ poll.question }}</h1>
-
-<!-- <ul>
-{% for choice in poll.country_set.all %}
-    <li>{{ choice.choice_text }}</li>
-{% endfor %}
-</ul> -->
-
 
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -17,7 +7,7 @@
 
 {% csrf_token %}
 
-<p>Please enter your name:
+<p>Please enter your first and last name:
 	<input type="text" name="name" size="15" maxlength="30" />
 </p>
 
@@ -27,19 +17,9 @@
 {% for choice in poll.country_set.all %}
 	
 	<option value="{{ choice.id }}" >{{ choice.choice_text }}</option>
-	
-    <!-- <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br /> -->
+
 {% endfor %}
 </select>
 <input type="submit" value="Vote" />
 </form>
 
-<!--
-<ul>
-{% for country in poll.choice_set.all %}
-	<li>{{ country.choice_text }}</li>
-{% endfor %}
-</ul>
-
--->

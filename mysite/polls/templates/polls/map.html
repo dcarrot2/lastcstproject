@@ -45,7 +45,7 @@
 						{
 							map:map,
 							position: results[0].geometry.location, //place marker at location
-							//animation: google.maps.Animation.BOUNCE
+							animation: google.maps.Animation.BOUNCE
 						});
 						
 						var infowindow = new google.maps.InfoWindow({
@@ -75,14 +75,21 @@
 			<li><h3><a href="{% url 'polls:detail' poll.id %}">Vote here</a></h3></li>
 		{% endfor %}
 		
-		<aside class="names">
+		<aside class="sideInfo">
 		<article>
 			<h3>Voters</h3>
-			{% for name in name_list %}
-				<p> {{name.name}} voted for {{name.vote}} </p>
-			{% endfor %}
+			{% if name_list %}
+				{% for name in name_list %}
+					<p> {{name.name}} voted for {{name.vote}} </p>
+				{% endfor %}
+			{% else %}
+				<p>No people have voted yet.</p>
+			{% endif %}
 		</article>
 		</aside>
+		
+		<div id = "map-canvas" style="height:700px;width:70%; float: right; padding: 2% 2%;margin: 1% 0% 1% 0%;">
+		</div>	
 			
 		<aside class="sideInfo">
 		<article>
@@ -95,14 +102,6 @@
 		</article>
 		</aside>
 		
-		<div id = "map-canvas" style="height:700px;width:1000px;position:fixed;top:-275px;right:-75px;">
-		</div>
-		
-		<!-- <div id = "map-canvas" style="height:825px;width:1000px;margin-left:auto;margin-right:auto;float:right;margin-top:auto;">
-		</div> -->
-		
-		
 		
 	</body>
- 
 </html>
