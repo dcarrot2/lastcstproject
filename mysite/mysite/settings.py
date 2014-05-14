@@ -86,7 +86,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
+#Tell django where to serve static media
 STATICFILES_DIRS = (
     STATIC_PATH,
     )

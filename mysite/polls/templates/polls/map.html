@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
+<!-- Note: {} are django template tags. They allow for indirect reference to database -->
 <html>
 
 	<head>
 		<title>Poll Map</title>
 		<meta charset = "utf-8" />
 		<link rel="stylesheet" href="/static/polls/poll.css" type="text/css"/>
+		<link rel="shortcut icon" href="/static/polls/59-128-20140514-favicon.ico">
 		<script src="http://maps.google.com/maps/api/js?sensor=false"
 		type="text/javascript"></script>
 		
@@ -45,20 +46,20 @@
 						{
 							map:map,
 							position: results[0].geometry.location, //place marker at location
-							animation: google.maps.Animation.BOUNCE
+							animation: google.maps.Animation.BOUNCE //animate marker
 						});
 						
 						var infowindow = new google.maps.InfoWindow({
-							content:address,
+							content:address, //info window for marker displays the address passed in
 						});
 						
 						google.maps.event.addListener(marker, 'click', function() {
-							infowindow.open(map,marker);
+							infowindow.open(map,marker);//open the info window when the marker is clicked
 						});
 						
 						
 					} else{
-						alert('Geocode was not succesful for the following reason: ' + status);
+						//alert('Geocode was not succesful for the following reason: ' + status);
 					}
 				});
 			}
@@ -74,7 +75,7 @@
 		{% for poll in poll_list %}
 			<li><h3><a href="{% url 'polls:detail' poll.id %}">Vote here</a></h3></li>
 		{% endfor %}
-		
+		<h3>What country have you always wanted to visit?</h3>
 		<aside class="sideInfo">
 		<article>
 			<h3>Voters</h3>

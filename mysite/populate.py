@@ -1,9 +1,9 @@
-##The purpose of this script is to populate database with data with need.
+##The purpose of this script is to populate database with data we need.
 ##It's a more autonomous process that can immediately populate the database
 ##in case the database file is deleted or needed to be deleted
 
 #This script crawls a webpage with countries and stores the countries into a list
-#
+
 
 import os
 
@@ -12,6 +12,7 @@ def populate():
 
     #open a url with a list of countries
     f = urllib2.urlopen('http://www.projectvisa.com/fullcountrylist.asp').read()
+    
     #turn into soup
     soup = BeautifulSoup(f)
 
@@ -20,8 +21,8 @@ def populate():
 
     #run through the soup and find all html tags with a
     for x in soup.findAll('a'):
-        #append any text within those tags to the array
-        countryList.append(str(''.join(x.findAll(text=True))))
+        
+        countryList.append(str(''.join(x.findAll(text=True))))#append any text within those tags to the array
 
     #The names of countries are located at even indexes. Odd indexes are the
     #continents where they are located. Let's splice and take the odd items out
@@ -35,7 +36,7 @@ def populate():
     trashIndex = -1 
 
     while(trashIndex != -8): #There's eight items we don't need
-        countryList.pop(-1) #Pop those items out
+        countryList.pop(-1) #Pops the last item in the list continously up to the eighth unneeded value
         trashIndex = trashIndex - 1 #Subtract index
 
     countryList.pop(0) #Pop an empty string from the first index of the list
@@ -45,9 +46,10 @@ def populate():
     first_poll = add_poll("What country have you always wanted to visit?")
 
 
-    #Loop through list and make the country strings into country objects
+    
     print "Storing the countries into the database..."
     
+    #Loop through list and make the country strings into country objects
     for i in range(0, len(countryList)):
         add_country(question=first_poll,nation=countryList[i],votes=0)
 
@@ -77,7 +79,7 @@ if __name__ == '__main__':
     print "Crawling the web for a list of countries..."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
     from polls.models import Question, Country #import my models
-    import urllib2
-    from bs4 import BeautifulSoup
-    populate()
-     #Call populate function
+    import urllib2 #to open url
+    from bs4 import BeautifulSoup #to crawl html
+    populate() #Call populate function
+     

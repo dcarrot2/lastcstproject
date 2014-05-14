@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/static/polls/question.css" type="text/css"/>
 <h1>{{ poll.question }}</h1>
+
+<h2>Your response has been submitted</h2>
+
+
 <li><h3><a href="/polls/map">Check out map here.</h3></a></li>
 <li><a href="{% url 'polls:detail' poll.id %}">Vote again?</a></li>
 
-<ul>
-{% for choice in poll.country_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
+
 

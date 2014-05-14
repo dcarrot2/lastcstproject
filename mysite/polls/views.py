@@ -53,6 +53,7 @@ def vote(request, poll_id):
 
 
         print "ID:", request.POST['choice'],"Name:", request.POST['name']
+        #print id and name        
         
     except (KeyError, Country.DoesNotExist):
         
@@ -96,55 +97,37 @@ def maps(request):
 
 @csrf_exempt
 def voteandroid(request, poll_id):
-    p = get_object_or_404(Question)
+    p = get_object_or_404(Question) #get question object from database
     print 'Post from Android'
 
     try:
-        print "Request body:", request.body
-        data=json.loads(request.body)
-        print "Data:", data
-        label=data['choice']
-        name = data['Name']
-        print 'First check'
-        print 'Label:' , label
-        selected_choice = p.country_set.get(choice_text=label)
-        print 'Second check'
-        print 'User made choice with country ' + label + ":"
+        print "Request body:", request.body #get anything on the page
+        data=json.loads(request.body) #load the request as json
+        print "Data:", data #print the json dictionary
+        label=data['choice']#look under choice index on dictionary
+        name = data['Name']#look under Name index on dictionary
+        print 'Label:' , label #print the country choice
+        selected_choice = p.country_set.get(choice_text=label) #query the database for that country
+        print 'User made choice with country ' + label + ":" #print the country
         print selected_choice
     except:
         print 'Exception: Could not parse JSON'
 
-    selected_choice.votes += 1
-    selected_choice.save()
+    selected_choice.votes += 1 #increase the vote count of that country
+    selected_choice.save() #Save changes to database
 
-    r = Name(name = str(name), vote=selected_choice)
-    r.save()
+    r = Name(name = str(name), vote=selected_choice) #Create new instance of name with json object
+    r.save()#Save name to database
 
-    return HttpResponse('')
-
-
-def sendandroid(request, poll_id):
-    
-    p = get_object_or_404(Question, pk=poll_id)#get Question object
-    
-    selected_choice = p.country_set.get(pk='1')#get the set of Countries for Question ID 1
-
-   
-    num= p.country_set.count() # get number of choices
-    response_data = {} #dictionary to store json
-    
-    for i in range(num):
-        selected_choice = p.country_set.get(pk=i+1) #get countries with id of index + 1
-        response_data[i+1]= (selected_choice.votes) #store into dict the amount of votes that country has
-        
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    return HttpResponse('') #Don't display anything for the page
 
 @csrf_exempt
 def sendandroidnames(request, poll_id):
 
     num = Name.objects.count() #count the number of names
     response_data={} #dictionary to store json
-    for i in range(num):
+    
+    for i in range(num): #loop through the amount of names
 
         Voter=Name.objects.get(pk=i+1) #name at id subindex of i plus one
         country_choice=Name.objects.get(pk=i+1).vote #get the country the name voted for

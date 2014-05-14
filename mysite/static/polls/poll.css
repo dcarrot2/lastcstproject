@@ -1,5 +1,5 @@
 .mainHead h1{
-	/*#797979*/
+	/*Cool header at the top*/
 	background-color: #122333;
 	height: 35px;
 	border-radius: 20px;
@@ -9,10 +9,10 @@
 	color: #FFFFFF;
 	text-align: center;
 }
-
+/*Two blocks displaying poll results*/
 .sideInfo{
 	width: 25%;
-	float: left; /*Changed to right from left*/
+	float: left; 
 	margin: 1% 0% 1% 0%; 
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
